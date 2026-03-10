@@ -1,114 +1,55 @@
-# LLM推理框架月度汇总报告
+# LLM-Docs
 
-**统计周期：** 2026年2月9日 - 2026年3月9日（过去一个月）  
-**生成时间：** 2026年3月9日  
-**数据来源：** GitHub API
+本仓库收录了大语言模型（LLM）推理框架的深度调研报告、技术分析和趋势洞察。
 
----
+## 📁 仓库内容
 
-## 一、合并 PR 数量统计
-
-| 项目 | 合并 PR 数量 | 活跃度 |
-|------|-------------|--------|
-| **SGLang** | **892** | 🔥 最高 |
-| **vLLM** | **875** | 🔥 极高 |
-| **TensorRT-LLM** | **426** | 🔥 高 |
-
-**分析：** SGLang 和 vLLM 活跃度相当，都接近 900 个合并 PR/月，TensorRT-LLM 约为它们的一半。
-
----
-
-## 二、vLLM 主要工作方向
-
-### 1. 硬件支持扩展
-- ROCm/AMD GPU 支持持续优化
-- Intel XPU 平台完善（Model Runner V2 支持）
-- ARM 架构支持增强
-
-### 2. 编译与性能优化
-- torch.compile 持续改进
-- Helion 内核自动调优基础设施
-- CUDA Graph 优化
-
-### 3. 模型支持
-- DeepSeek 系列模型优化
-- Qwen3 / GLM 系列适配
-- MTP (Multi-Token Prediction) 支持
-
-### 4. 稳定性修复
-- Pipeline Parallel 修复
-- KV Cache 管理优化
-- 各类边界情况处理
-
----
-
-## 三、SGLang 主要工作方向
-
-### 1. 扩散模型 (Diffusion)
-- Wan2.1、Qwen-Image 等图像生成模型支持
-- TeaCache 优化
-- CFG Zero Star 等技术集成
-
-### 2. 高性能内核
-- FlashInfer 升级 (0.6.3)
-- JIT Kernel 优化（NVFP4、MXFP4）
-- DeepGEMM 集成
-
-### 3. 调度与缓存
-- HiCache (分层缓存) 架构完善
-- Prefix Cache 优化
-- PD (Prefill-Decode) 分离支持
-
-### 4. 多模态支持
-- VLM 模型支持增强
-- 视频/图像输入处理优化
-
----
-
-## 四、TensorRT-LLM 主要工作方向
-
-### 1. 部署与推理优化
-- AutoDeploy 功能持续完善
-- 多实例支持 (Triton backend)
-- KV Cache 管理优化 (UnifiedBlockTree)
-
-### 2. 新模型支持
-- Qwen3.5 系列
-- Kimi-K2.5 (NVFP4)
-- Llama4、Mistral Large 3
-
-### 3. 分离式推理 (Disaggregated Serving)
-- E/PD (Encode/Prefill-Decode) 分离
-- Chunked Prefill 优化
-- KV Cache 传输优化
-
-### 4. MoE 专家模型优化
-- All-to-All 通信优化
-- DeepEP Low Latency 支持
-- 各类量化方案 (FP8/NVFP4/MXFP4)
-
----
-
-## 五、总体趋势分析
-
-1. **三大框架都处于高速迭代期**，每月都有大量功能更新和性能优化  
-2. **硬件适配是共同重点**：都在积极支持 AMD、Intel 等非 NVIDIA 硬件  
-3. **扩散模型成为新战场**：SGLang 在文生图/视频领域投入巨大  
-4. **分离式推理成标配**：vLLM 和 TensorRT-LLM 都在强化 PD 分离架构  
-5. **量化技术深入**：FP8、NVFP4、MXFP4 等低精度推理成为标配  
-6. **长上下文优化**：KV Cache 管理、前缀缓存等技术持续演进  
-7. **多模态统一**：文本、图像、视频、音频的统一处理成为趋势  
-
----
-
-## 六、总结
-
-| 框架 | 特点 |
+| 文件 | 描述 |
 |------|------|
-| **vLLM** | 社区最活跃，覆盖面最广，通用性最强 |
-| **SGLang** | 在多模态和扩散模型上发力明显，性能优化激进 |
-| **TensorRT-LLM** | 企业级部署首选，NVIDIA 硬件优化领先 |
+| **LLM_Inference_Framework_Monthly_Summary.md** | vLLM、SGLang、TensorRT-LLM 月度汇总报告（PR统计、主要工作方向、趋势分析） |
+| **contributor_company_analysis.md** | 三大框架贡献者公司/组织分布统计（基于GitHub commit邮箱分析） |
+| **commit_author_analysis.md** | 提交作者详细分析（早期版本，已合并到 contributor_company_analysis.md） |
+| **tpu_architecture_analysis.md** | TPU后端架构深度分析（与GPU架构差异、性能优化策略） |
+
+## 🎯 调研范围
+
+### 核心框架
+- **vLLM** - 开源LLM推理引擎，PagedAttention开创者
+- **SGLang** - 高性能推理框架，多模态/扩散模型优化
+- **TensorRT-LLM** - NVIDIA企业级推理优化方案
+
+### 分析维度
+- 📊 社区活跃度（PR数量、提交频率）
+- 🏢 企业参与情况（公司分布、贡献比例）
+- 🔧 技术演进方向（硬件支持、性能优化、新特性）
+- 📈 架构趋势（分离式推理、量化技术、多模态）
+
+## 📊 最新统计（2026年2月-3月）
+
+| 框架 | 月提交数 | 主要贡献者 | 特点 |
+|------|---------|-----------|------|
+| vLLM | 877 | Red Hat(14.6%), AMD(8.8%), Intel(7.2%) | 企业协作典范，多硬件支持 |
+| SGLang | 896 | 个人开发者(44.9%), AMD(5.1%) | 社区驱动，多模态领先 |
+| TensorRT-LLM | 437 | NVIDIA(66.8%) | 企业级产品，NVIDIA生态核心 |
+
+## 🔍 使用场景
+
+- **技术选型参考** - 了解各框架优势与适用场景
+- **行业趋势分析** - 追踪LLM推理技术发展方向
+- **社区贡献洞察** - 识别主要厂商和技术生态
+- **架构设计借鉴** - 学习先进推理系统设计思想
+
+## 📝 更新频率
+
+- **月度报告** - 每月初更新三大框架活跃度统计
+- **专题分析** - 针对热点技术（如TPU支持、新模型适配）不定期发布深度分析
+
+## 🤝 贡献
+
+报告基于GitHub公开数据分析生成，欢迎提出改进建议或补充其他框架的调研。
 
 ---
-*数据来源：GitHub API (api.github.com)  
-*统计脚本：OpenClaw GitHub Skill
+
+*最后更新：2026年3月10日*  
+*数据来源：GitHub API*  
+*生成工具：OpenClaw*

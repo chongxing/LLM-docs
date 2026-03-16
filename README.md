@@ -2,7 +2,38 @@
 
 本仓库收录了大语言模型（LLM）推理框架的深度调研报告、技术分析和趋势洞察。
 
-## 📁 仓库内容
+## 📁 仓库结构
+
+```
+LLM-docs/
+├── README.md                           # 本文件
+├── sglang/                             # SGLang 开源社区日报
+├── vllm/                               # vLLM 开源社区日报
+├── tensorrt-llm/                       # TensorRT-LLM 开源社区日报
+├── pytorch/                            # PyTorch 开源社区日报
+├── iree/                               # IREE 开源社区日报
+└── others/                             # 其他专题分析文档
+    ├── LLM_Inference_Framework_Monthly_Summary.md    # 月度汇总报告
+    ├── contributor_company_analysis.md                # 贡献者公司分布统计
+    ├── commit_author_analysis.md                      # 提交作者分析
+    └── tpu_architecture_analysis.md                   # TPU架构深度分析
+```
+
+## 📊 日报监控（自动更新）
+
+每日自动生成以下框架的社区日报：
+
+| 框架 | 目录 | 监控内容 |
+|------|------|----------|
+| **SGLang** | `sglang/` | PR、Commits、技术动态 |
+| **vLLM** | `vllm/` | PR、Commits、性能优化 |
+| **TensorRT-LLM** | `tensorrt-llm/` | PR、Commits、NVIDIA生态 |
+| **PyTorch** | `pytorch/` | PR、Commits、分布式训练 |
+| **IREE** | `iree/` | PR、Commits、MLIR编译器 |
+
+**文件名格式**: `框架名-开源社区日报-YYYY-MM-DD.md`
+
+## 📑 专题分析文档（others/）
 
 | 文件 | 描述 |
 |------|------|
@@ -17,6 +48,8 @@
 - **vLLM** - 开源LLM推理引擎，PagedAttention开创者
 - **SGLang** - 高性能推理框架，多模态/扩散模型优化
 - **TensorRT-LLM** - NVIDIA企业级推理优化方案
+- **PyTorch** - 深度学习框架，分布式训练支持
+- **IREE** - MLIR-based 机器学习编译器
 
 ### 分析维度
 - 📊 社区活跃度（PR数量、提交频率）
@@ -41,6 +74,7 @@
 
 ## 📝 更新频率
 
+- **日报** - 每天 08:00 自动生成五大框架的社区日报
 - **月度报告** - 每月初更新三大框架活跃度统计
 - **专题分析** - 针对热点技术（如TPU支持、新模型适配）不定期发布深度分析
 
@@ -50,6 +84,6 @@
 
 ---
 
-*最后更新：2026年3月10日*  
+*最后更新：2026年3月16日*  
 *数据来源：GitHub API*  
 *生成工具：OpenClaw*

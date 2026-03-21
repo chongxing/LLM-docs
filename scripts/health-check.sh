@@ -21,8 +21,38 @@ fi
 # 获取当前时间
 CURRENT_TIME=$(date '+%H:%M')
 
-# 发送消息到主会话 (通过 openclaw 事件系统)
-echo "heartbeat:health-check" > /tmp/health-check-trigger.flag
+# 发送消息到飞书（带重试）
+MESSAGE="🟢 系统状态正常 | ${CURRENT_TIME}
 
-echo "Health check triggered at $CURRENT_TIME"
+Gateway: 运行中
+Feishu: 已连接
+模型: kimi-coding/kimi-for-coding
+
+🌤️ 上海天气: ${WEATHER}
+
+07:30 开始生成日报..."
+
+# 发送消息到飞书群（带重试）
+CHAT_ID="oc_386315a3bceb7efc451dd781551578a8"
+
+for attempt in 1 2 3 4 5; do
+    RESPONSE=$(cd /Users/xuchong/.openclaw/workspace && openclaw message send --channel feishu --target "chat:$CHAT_ID" --message "$MESSAGE" 2>&1)
+    EXIT_CODE=$?
+    if [ $EXIT_CODE -eq 0 ]; then
+        echo "Health check message sent successfully at $CURRENT_TIME (attempt $attempt)"
+        break
+    else
+        echo "Attempt $attempt failed (exit: $EXIT_CODE): $RESPONSE"
+        if [ $attempt -lt 5 ]; then
+            sleep 3
+        fi
+    fi
+done
+
+if [ $attempt -eq 5 ] && [ $EXIT_CODE -ne 0 ]; then
+    echo "Failed to send health check message after 5 attempts"
+    exit 1
+fi
+
+echo "Health check completed at $CURRENT_TIME"
 echo "Weather: $WEATHER"
